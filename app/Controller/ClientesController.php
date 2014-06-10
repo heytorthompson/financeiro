@@ -95,6 +95,7 @@ class ClientesController extends Controller {
 		    echo '<h3>Obrigado por efetuar a compra.</h3>';
 		    
 		}
+		$this->log("PagSeguro", $result);
 		echo '<pre>';
 			var_dump($result);
 			die;
@@ -103,60 +104,5 @@ class ClientesController extends Controller {
 
 	}
 	
-	function getUrlPagSeguro() {
-
-	    $data['email'] = 'heytorthompson@gmail.com';
-		$data['token'] = 'D4CA9D635DBC41DCAC2F5791163B53B2';
-		$data['currency'] = 'BRL';
-		$data['itemId1'] = '0001';
-		$data['itemDescription1'] = 'Notebook Prata';
-		$data['itemAmount1'] = '24.00';
-		$data['itemQuantity1'] = '1';
-		$data['itemWeight1'] = '1000';
-		$data['itemId2'] = '0002';
-		$data['itemDescription2'] = 'Notebook Rosa';
-		$data['itemAmount2'] = '20.00';
-		$data['itemQuantity2'] = '2';
-		$data['itemWeight2'] = '750';
-		$data['reference'] = 'REF123434';
-		$data['senderName'] = 'Joses Comprador';
-		$data['senderAreaCode'] = '11';
-		$data['senderPhone'] = '56273440';
-		$data['senderEmail'] = 'comprador@uol.com.br';
-		$data['shippingType'] = '3';
-		$data['shippingAddressStreet'] = 'Av. Brig. Faria Lima';
-		$data['shippingAddressNumber'] = '1384';
-		$data['shippingAddressComplement'] = '5o andar';
-		$data['shippingAddressDistrict'] = 'Jardim Paulistano';
-		$data['shippingAddressPostalCode'] = '01452002';
-		$data['shippingAddressCity'] = 'Sao Paulo';
-		$data['shippingAddressState'] = 'SP';
-		$data['shippingAddressCountry'] = 'BRA';
-		$data['redirectURL'] = 'http://www.sounoob.com.br/paginaDeAgracedimento';
-	    
-	    $resposta = $this->curlPost('https://ws.pagseguro.uol.com.br/v2/checkout/', $data);
-
-	    return $resposta;
-	}
-	function curlPost($url, $data) {
-
-	    $data = http_build_query($data);
-
-		$curl = curl_init($url);
-
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($curl, CURLOPT_POST, true);
-
-		curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-
-		$xml= curl_exec($curl);
-
-
-	    return $xml;
-	}
+	
 }
