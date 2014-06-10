@@ -32,16 +32,16 @@ App::uses('Controller', 'Controller');
  */
 class ClientesController extends Controller {
 	
-	header('Content-Type: text/html; charset=ISO-8859-1');
+	
 
-	define('TOKEN', '27CF0B0980834A99A84FF278034447B8');
+	
 	private $timeout = 20; // Timeout em segundos
 
 	function index (){
 
 	}
 	public function notificationPost() {
-		$postdata = 'Comando=validar&Token='.TOKEN;
+		$postdata = 'Comando=validar&Token=27CF0B0980834A99A84FF278034447B8';
 		foreach ($_POST as $key => $value) {
 			$valued    = $this->clearStr($value);
 			$postdata .= "&$key=$valued";
@@ -70,15 +70,13 @@ class ClientesController extends Controller {
 	}
 
 	function lista(){
-	
+	header('Content-Type: text/html; charset=ISO-8859-1');
 		if (count($_POST) > 0) {
 			
 			// POST recebido, indica que é a requisição do NPI.
 			
 			$result = $this->notificationPost();
-			echo '<pre>';
-			var_dump($result);
-			die;
+			
 			
 			$transacaoID = isset($_POST['TransacaoID']) ? $_POST['TransacaoID'] : '';
 			
@@ -97,7 +95,11 @@ class ClientesController extends Controller {
 		    echo '<h3>Obrigado por efetuar a compra.</h3>';
 		    
 		}
-
+		echo '<pre>';
+			var_dump($result);
+			die;
+		$this->layout = false;
+		$this->render(false);
 
 	}
 	
