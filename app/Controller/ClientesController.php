@@ -95,7 +95,7 @@ class ClientesController extends Controller {
 		    echo '<h3>Obrigado por efetuar a compra.</h3>';
 		    
 		}
-		$this->log("PagSeguro", $result);
+		$this->log("PagSeguro");
 		echo '<pre>';
 			var_dump($result);
 			die;
