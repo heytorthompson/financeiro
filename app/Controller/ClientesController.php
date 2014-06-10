@@ -30,25 +30,10 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class PrincipalController extends Controller {
+class ClientesController extends Controller {
 	
-	function index(){
-		//$dados = $this->getStatusTransacao(1);
-
-		//criando transacao
-		$dados = $this->getUrlPagSeguro();
-		$url = '';
-		if ($dados == 'Unauthorized'){
-
-		}else{
-			$ano = date('Y');
-			$code =	explode($ano, $dados);
-			$url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='. $code[0];
-		}
-		// criando transacao
-		echo '<pre>';
-		var_dump($url);
-		die;
+	function lista(){
+	die('lsita');
 	}
 	/*function getStatusTransacao($code){
 		$data['email'] = 'heytorthompson@gmail.com';
