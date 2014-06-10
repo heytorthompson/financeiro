@@ -67,19 +67,15 @@ class PrincipalController extends Controller {
 	function getUrlPagSeguro() {
 
 	    $data['email'] = 'heytorthompson@gmail.com';
-		$data['token'] = 'D4CA9D635DBC41DCAC2F5791163B53B2';
+	    $data['Comando'] = 'validar';
+		$data['token'] = '27CF0B0980834A99A84FF278034447B8';
 		$data['currency'] = 'BRL';
 		$data['itemId1'] = '0001';
 		$data['itemDescription1'] = 'Notebook Prata';
-		$data['itemAmount1'] = '24.00';
+		$data['itemAmount1'] = '1.00';
 		$data['itemQuantity1'] = '1';
 		$data['itemWeight1'] = '1000';
-		$data['itemId2'] = '0002';
-		$data['itemDescription2'] = 'Notebook Rosa';
-		$data['itemAmount2'] = '20.00';
-		$data['itemQuantity2'] = '2';
-		$data['itemWeight2'] = '750';
-		$data['reference'] = 'REF123434';
+		$data['reference'] = 'REF666';
 		$data['senderName'] = 'Joses Comprador';
 		$data['senderAreaCode'] = '11';
 		$data['senderPhone'] = '56273440';
