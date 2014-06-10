@@ -32,8 +32,12 @@ App::uses('Controller', 'Controller');
  */
 class ClientesController extends Controller {
 	
+	function index (){
+
+	}
+
 	function lista(){
-	die('lsita');
+	die('lista');
 	}
 	/*function getStatusTransacao($code){
 		$data['email'] = 'heytorthompson@gmail.com';
