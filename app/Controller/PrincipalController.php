@@ -89,7 +89,7 @@ class PrincipalController extends Controller {
 		$data['shippingAddressCity'] = 'Sao Paulo';
 		$data['shippingAddressState'] = 'SP';
 		$data['shippingAddressCountry'] = 'BRA';
-		$data['redirectURL'] = 'http://www.sounoob.com.br/paginaDeAgracedimento';
+		$data['redirectURL'] = 'http://107.170.171.150/clientes/lista';
 	    
 	    $resposta = $this->curlPost('https://ws.pagseguro.uol.com.br/v2/checkout/', $data);
 
