@@ -41,66 +41,42 @@ class ClientesController extends Controller {
 
 	}
 	public function notificationPost() {
-		$postdata = 'Comando=validar&Token=27CF0B0980834A99A84FF278034447B8';
-		foreach ($_POST as $key => $value) {
-			$valued    = $this->clearStr($value);
-			$postdata .= "&$key=$valued";
-		}
-		return $this->verify($postdata);
-	}
-
-	private function clearStr($str) {
-		if (!get_magic_quotes_gpc()) {
-			$str = addslashes($str);
-		}
-		return $str;
+	
 	}
 	private function verify($data) {
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, "https://pagseguro.uol.com.br/pagseguro-ws/checkout/NPI.jhtml");
-		curl_setopt($curl, CURLOPT_POST, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_HEADER, false);
-		curl_setopt($curl, CURLOPT_TIMEOUT, $this->timeout);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-		$result = trim(curl_exec($curl));
-		curl_close($curl);
-		return $result;
+	
 	}
 
 	function lista(){
-	header('Content-Type: text/html; charset=ISO-8859-1');
-		if (count($_POST) > 0) {
-			
-			// POST recebido, indica que é a requisição do NPI.
-			
-			$result = $this->notificationPost();
-			
-			
-			$transacaoID = isset($_GET['transaction_id']) ? $_GET['transaction_id'] : '';
-			
-			if ($result == "VERIFICADO") {
-				//O post foi validado pelo PagSeguro.
-			} else if ($result == "FALSO") {
-				//O post não foi validado pelo PagSeguro.
-			} else {
-				//Erro na integração com o PagSeguro.
-			}
-			
-		} else {
-			// POST não recebido, indica que a requisição é o retorno do Checkout PagSeguro.
-			// No término do checkout o usuário é redirecionado para este bloco.
-			
-		    echo '<h3>Obrigado por efetuar a compra.</h3>';
-		    
+
+		$email = 'heytorthompson@gmail.com';
+		$token = '27CF0B0980834A99A84FF278034447B8';
+		var_dump($_REQUEST);
+		die;
+		$transaction = 'G88B885A-7C3F-436C-XX49-049D0F1A9DXX';
+
+		$url = 'https://ws.pagseguro.uol.com.br/v2/transactions/' . $transaction . '?email=' . $email . '&token=' . $token;
+
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		$transaction= curl_exec($curl);
+		curl_close($curl);
+
+		if($transaction == 'Unauthorized') {
+		//Insira seu código avisando que o sistema está com problemas, sugiro enviar um e-mail avisando para alguém fazer a manutenção
+		echo 'You shall not pass';
+		exit;//Mantenha essa linha para evitar que o código prossiga
 		}
-		$this->log("PagSeguro");
-		echo '<pre>';
-			var_dump($result);
-			die;
-		$this->layout = false;
-		$this->render(false);
+
+		$transaction = simplexml_load_string($transaction);
+
+		if(count($transaction -> error) > 0) {
+		//Insira seu código avisando que o sistema está com problemas, sugiro enviar um e-mail avisando para alguém fazer a manutenção
+		var_dump($transaction);
+		}
+		echo $transaction -> sender -> email;
+
 
 	}
 	
