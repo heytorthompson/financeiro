@@ -78,7 +78,7 @@ class ClientesController extends Controller {
 			$result = $this->notificationPost();
 			
 			
-			$transacaoID = isset($_POST['TransacaoID']) ? $_POST['TransacaoID'] : '';
+			$transacaoID = isset($_GET['transaction_id']) ? $_GET['transaction_id'] : '';
 			
 			if ($result == "VERIFICADO") {
 				//O post foi validado pelo PagSeguro.
