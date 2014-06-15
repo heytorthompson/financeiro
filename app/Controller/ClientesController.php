@@ -51,9 +51,8 @@ class ClientesController extends Controller {
 
 		$email = 'heytorthompson@gmail.com';
 		$token = '27CF0B0980834A99A84FF278034447B8';
-		var_dump($_REQUEST);
-		die;
-		$transaction = 'G88B885A-7C3F-436C-XX49-049D0F1A9DXX';
+		
+		$transaction = $_REQUEST['transaction_id'];
 
 		$url = 'https://ws.pagseguro.uol.com.br/v2/transactions/' . $transaction . '?email=' . $email . '&token=' . $token;
 
