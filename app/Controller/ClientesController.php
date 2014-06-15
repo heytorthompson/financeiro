@@ -67,7 +67,9 @@ class ClientesController extends Controller {
 		echo 'You shall not pass';
 		exit;//Mantenha essa linha para evitar que o código prossiga
 		}
-
+		echo '<pre>';
+		var_dump($transaction);
+		die;
 		$transaction = simplexml_load_string($transaction);
 
 		if(count($transaction -> error) > 0) {
