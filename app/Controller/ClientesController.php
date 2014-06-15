@@ -67,11 +67,11 @@ class ClientesController extends Controller {
 		echo 'You shall not pass';
 		exit;//Mantenha essa linha para evitar que o código prossiga
 		}
+		
+		$transaction = simplexml_load_string($transaction);
 		echo '<pre>';
 		var_dump($transaction);
 		die;
-		$transaction = simplexml_load_string($transaction);
-
 		if(count($transaction -> error) > 0) {
 		//Insira seu código avisando que o sistema está com problemas, sugiro enviar um e-mail avisando para alguém fazer a manutenção
 		var_dump($transaction);
