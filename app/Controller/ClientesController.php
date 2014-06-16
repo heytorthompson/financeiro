@@ -21,6 +21,7 @@
 
 App::uses('Controller', 'Controller');
 App::import('Vendor', 'PagSeguroLibrary/PagSeguroLibrary');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Application Controller
@@ -35,7 +36,7 @@ class ClientesController extends Controller {
 	
 	
 
-	public $uses = array('Produto');
+	public $uses = array('Fatura');
 	//private $timeout = 20; // Timeout em segundos
 
 	function index (){
@@ -43,6 +44,16 @@ class ClientesController extends Controller {
 	}
 
 	function lista(){
+		$statusTransacao = array(
+		
+			1 => 'Aguardando pagamento: o comprador iniciou a transação, mas até o momento o PagSeguro não recebeu nenhuma informação sobre o pagamento.',
+			2 => 'Em análise: o comprador optou por pagar com um cartão de crédito e o PagSeguro está analisando o risco da transação.',
+			3 =>	'Paga: a transação foi paga pelo comprador e o PagSeguro já recebeu uma confirmação da instituição financeira responsável pelo processamento.',
+			4 =>	'Disponível: a transação foi paga e chegou ao final de seu prazo de liberação sem ter sido retornada e sem que haja nenhuma disputa aberta.',
+			5 =>	'Em disputa: o comprador, dentro do prazo de liberação da transação, abriu uma disputa.',
+			6 =>	'Devolvida: o valor da transação foi devolvido para o comprador.',
+			7 =>	'Cancelada: a transação foi cancelada sem ter sido finalizada.'
+		);
 		try {
     		
 			$model = $this->modelClass;
@@ -116,29 +127,46 @@ class ClientesController extends Controller {
             $this->request->data[$model]['extra_amount'] = $extraAmount;
             $this->request->data[$model]['payment_method'] = $paymentMethod;
 
-            $existeReference = $this->Produto->find('first',array('conditions'=>array('Produto.reference' => $reference)));
-            if($existeReference){
-            	$this->$model->update( array('Produto.last_event_date' => $lastEventDate,'Produto.status'=>$status), 
-            		array('Produto.reference' => $reference) );
+            $Email = new CakeEmail();
+				$Email->from(array('noreplaymmn@gmail.com' => 'Dinheiro'));
+				$Email->to('heytorthompson@gmail.com');
+				
 
-            	$this->Email->from    = 'Dinheiro <heytorthompson@gmail.com>';
-                $this->Email->to      = "Monitoramento <heytorthompson@gmail.com>";
-                $this->Email->subject = 'Status Alterado';
-                $html = "Data : ".$date.'<br/>';
-                $html .= "Reference id : ".$reference.'<br/>';
-                $this->Email->send($html);
+            $existeReference = $this->Fatura->find('first',array('conditions'=>array('Fatura.reference' => $reference)));
+            
+            if($existeReference){
+            	
+            	$this->$model->update( array('Fatura.last_event_date' => $lastEventDate,'Fatura.status'=>$status), 
+            		array('Fatura.reference' => $reference) );
+
+            	foreach ($statusTransacao as $key => $value) {
+            		if ($key == $status){
+
+            			$Email->subject('Alteracao de status');
+						$html = "Data : ".$date.'<br/>';
+		                $html .= "Reference id : ".$reference.'<br/>';
+		                $html .= "status : (".$value.')<br/>';
+						$reposta = $Email->send($html);
+            		}
+            		
+            	}
+            	
+            	
 
             }else{
             	if ($this->$model->save($this->request->data)) {
-                //disparando email com informações sobre a senha.
-                $this->Email->from    = 'Dinheiro <heytorthompson@gmail.com>';
-                $this->Email->to      = "Monitoramento <heytorthompson@gmail.com>";
-                $this->Email->subject = 'Referencia Inserida no sistema';
-                $html = "Data : ".$date.'<br/>';
-                $html .= "Reference id : ".$reference.'<br/>';
-                $this->Email->send($html);
+	                foreach ($statusTransacao as $key => $value) {
+	            		if ($key == $status){
 
-                die('inserido com sucesso');
+	            			$Email->subject('Referencia Inserida no sistema');
+							$html = "Data : ".$date.'<br/>';
+			                $html .= "Reference id : ".$reference.'<br/>';
+			                $html .= "status : (".$value.')<br/>';
+							$reposta = $Email->send($html);
+	            		}
+	            		
+	            	}
+              
                 } else {
                     die('deu erro');
                 }
@@ -146,10 +174,15 @@ class ClientesController extends Controller {
             }
 
 		} catch(Exception $e) {
+			$Email->subject('deu algo de errado no Controller de Clientes');
+			$html = "Mensagem de erro : ".$e->getMessage().'<br/>';
+			$reposta = $Email->send($html);
+
+
 		    $this->Email->from    = 'Dinheiro <heytorthompson@gmail.com>';
             $this->Email->to      = "Monitoramento <heytorthompson@gmail.com>";
             $this->Email->subject = 'deu algo de errado no Controller de Clientes';
-            $html = "Mensagem de erro : ".$e->getMessage().'<br/>';
+           
             $this->Email->send($html);
 		}
 

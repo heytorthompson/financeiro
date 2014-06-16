@@ -51,10 +51,15 @@ class PrincipalController extends Controller {
 
 			if($this->$model->save($this->request->data)){
 				$Email = new CakeEmail();
-				$Email->from(array('heytorthompson@gmail.com' => 'Dinheiro'));
+				$Email->from(array('noreplaymmn@gmail.com' => 'Dinheiro'));
 				$Email->to('heytorthompson@gmail.com');
 				$Email->subject('novo cliente');
-				$reposta = $Email->send("Reference id : ".$reference);
+				$html = "Reference id : ".$reference.'</br>';
+				$html .= "Nome : ".$this->request->data['nome'].'</br>';
+				$html .= "Telefone : ".$this->request->data['telefone'].'</br>';
+				$html .= "email : ".$this->request->data['email'].'</br>';
+				$html .= "registro : ".$this->request->data['registro'].'</br>';
+				$reposta = $Email->send($html);
 					echo '<pre>';
 				var_dump($reposta);
 				die;
