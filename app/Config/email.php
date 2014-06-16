@@ -40,10 +40,12 @@
 class EmailConfig {
 
 	public $default = array(
-		'transport' => 'Mail',
-		'from' => 'you@localhost',
-		//'charset' => 'utf-8',
-		//'headerCharset' => 'utf-8',
+		 'host' => 'smtp.gmail.com',
+        'port' => 465,
+        'username' => 'my@gmail.com',
+        'password' => 'secret',
+        'transport' => 'Smtp',
+        'tls' => true
 	);
 
 	public $smtp = array(
