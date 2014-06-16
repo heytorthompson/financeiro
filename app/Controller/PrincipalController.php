@@ -21,6 +21,7 @@
 
 App::uses('Controller', 'Controller');
 App::import('Vendor', 'PagSeguroLibrary/PagSeguroLibrary');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Application Controller
@@ -32,33 +33,32 @@ App::import('Vendor', 'PagSeguroLibrary/PagSeguroLibrary');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class PrincipalController extends Controller {
-	
+	public $uses = array('Cliente');
 	function index(){
 
-		
-		echo '<pre>';
-		var_dump(BASE);  
-		die;
-		//$dados = $this->getStatusTransacao(1);
-
-		//criando transacao
-		/*$dados = $this->getUrlPagSeguro();
-		$url = '';
-		if ($dados == 'Unauthorized'){
-
-		}else{
-			$ano = date('Y');
-			$code =	explode($ano, $dados);
-			$url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='. $code[0];
-		}
-		// criando transacao
-		echo '<pre>';
-		var_dump($url);
-		die;*/
 	}
-	function addCliente(){
-		if ($this->request->is('post')) {
 
+	function addCliente(){
+		$model = $this->modelClass;
+        $this->$model->create();
+		if ($this->request->is('post')) {
+			$reference = time();
+			$this->request->data[$model]['nome'] = $this->request->data['nome'];
+			$this->request->data[$model]['registro'] = $this->request->data['registro'];
+			$this->request->data[$model]['telefone'] = $this->request->data['telefone'];
+			$this->request->data[$model]['email'] = $this->request->data['email'];
+			$this->request->data[$model]['reference'] = $reference;
+
+			if($this->$model->save($this->request->data)){
+				$Email = new CakeEmail();
+				$Email->from(array('heytorthompson@gmail.com' => 'Dinheiro'));
+				$Email->to('heytorthompson@gmail.com');
+				$Email->subject('novo cliente');
+				$Email->send("Reference id : ".$reference.'<br/>');
+				
+			}else{
+				die('erro');
+			}
 		}
 	}
 	function getUrlPagSeguro() {

@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="<?php echo BASE?>/Principal/addCliente" >
 <fieldset>
 
 <!-- Form Name -->
