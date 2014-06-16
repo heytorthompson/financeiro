@@ -20,6 +20,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::import('Vendor', 'PagSeguroLibrary/PagSeguroLibrary');
 
 /**
  * Application Controller
@@ -33,10 +34,15 @@ App::uses('Controller', 'Controller');
 class PrincipalController extends Controller {
 	
 	function index(){
+
+		
+		echo '<pre>';
+		var_dump(BASE);  
+		die;
 		//$dados = $this->getStatusTransacao(1);
 
 		//criando transacao
-		$dados = $this->getUrlPagSeguro();
+		/*$dados = $this->getUrlPagSeguro();
 		$url = '';
 		if ($dados == 'Unauthorized'){
 
@@ -48,52 +54,52 @@ class PrincipalController extends Controller {
 		// criando transacao
 		echo '<pre>';
 		var_dump($url);
-		die;
+		die;*/
 	}
-	/*function getStatusTransacao($code){
-		$data['email'] = 'heytorthompson@gmail.com';
-		$data['token'] = 'D4CA9D635DBC41DCAC2F5791163B53B2';
-		$data['code'] = 'REF1234';
+	function addCliente(){
+		if ($this->request->is('post')) {
 
-		$curl = curl_init('https://ws.pagseguro.uol.com.br/v2/transactions/notifications/'.$data['code'].'?email=' . $data['email'] . '&token=' . $data['token'] );
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		$transaction= curl_exec($curl);
-		curl_close($curl);
-
-	    return $transaction;
-
-	}*/
+		}
+	}
 	function getUrlPagSeguro() {
+		if ($this->request->is('post')) {
 
-	    $data['email'] = 'heytorthompson@gmail.com';
-	    $data['Comando'] = 'validar';
-		$data['token'] = '27CF0B0980834A99A84FF278034447B8';
-		$data['currency'] = 'BRL';
-		$data['itemId1'] = '0001';
-		$data['itemDescription1'] = 'Notebook Prata';
-		$data['itemAmount1'] = '1.00';
-		$data['itemQuantity1'] = '1';
-		$data['itemWeight1'] = '1000';
-		$data['reference'] = 'REF666';
-		$data['senderName'] = 'Joses Comprador';
-		$data['senderAreaCode'] = '11';
-		$data['senderPhone'] = '56273440';
-		$data['senderEmail'] = 'comprador@uol.com.br';
-		$data['shippingType'] = '3';
-		$data['shippingAddressStreet'] = 'Av. Brig. Faria Lima';
-		$data['shippingAddressNumber'] = '1384';
-		$data['shippingAddressComplement'] = '5o andar';
-		$data['shippingAddressDistrict'] = 'Jardim Paulistano';
-		$data['shippingAddressPostalCode'] = '01452002';
-		$data['shippingAddressCity'] = 'Sao Paulo';
-		$data['shippingAddressState'] = 'SP';
-		$data['shippingAddressCountry'] = 'BRA';
-		$data['redirectURL'] = 'http://107.170.171.150/clientes/lista';
-	    
-	    $resposta = $this->curlPost('https://ws.pagseguro.uol.com.br/v2/checkout/', $data);
+			$paymentRequest = new PagSeguroPaymentRequest();
+			$paymentRequest->addItem('0001', 'Notebook', 1, 300.00); 
 
-	    return $resposta;
+			$paymentRequest->setSender(  
+			    'José Comprador',   
+			    'comprador@uol.com.br',   
+			    '11',   
+			    '56273440'  
+			); 
+			$paymentRequest->setShippingAddress(  
+			    '01452002',   
+			    'Av. Brig. Faria Lima',       
+			    '1384',       
+			    'apto. 114',       
+			    'Jardim Paulistano',      
+			    'São Paulo',      
+			    'SP',     
+			    'BRA'     
+			);  
+			$paymentRequest->setCurrency("BRL");  
+
+			$paymentRequest->setShippingType(3);
+
+			$paymentRequest->setReference("I9635");  
+			$paymentRequest->addParameter('notificationURL', 'http://107.170.171.150/clientes/lista');  
+			//$paymentRequest->addParameter('senderCPF', '12345678901');
+
+			// Informando as credenciais  
+			$credentials = new PagSeguroAccountCredentials(  
+			    'heytorthompson@gmail.com',   
+			    '27CF0B0980834A99A84FF278034447B8'  
+			);  
+			  
+			// fazendo a requisição a API do PagSeguro pra obter a URL de pagamento  
+			$url = $paymentRequest->register($credentials);
+		}
 	}
 	function curlPost($url, $data) {
 
