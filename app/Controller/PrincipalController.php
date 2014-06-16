@@ -54,8 +54,10 @@ class PrincipalController extends Controller {
 				$Email->from(array('heytorthompson@gmail.com' => 'Dinheiro'));
 				$Email->to('heytorthompson@gmail.com');
 				$Email->subject('novo cliente');
-				$Email->send("Reference id : ".$reference);
-				
+				$reposta = $Email->send("Reference id : ".$reference);
+					echo '<pre>';
+				var_dump($reposta);
+				die;
 			}else{
 				die('erro');
 			}
