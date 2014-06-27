@@ -34,6 +34,7 @@ App::uses('CakeEmail', 'Network/Email');
  */
 class PrincipalController extends Controller {
 	public $uses = array('Cliente');
+	
 	function index(){
 
 	}
@@ -68,17 +69,21 @@ class PrincipalController extends Controller {
 			}
 		}
 	}
-	function getUrlPagSeguro() {
-		if ($this->request->is('post')) {
 
+
+	function getUrlPagSeguro($reference) {
+		$cliente = $this->Cliente->findByReference($reference);
+
+		if ($cliente) {
+				
 			$paymentRequest = new PagSeguroPaymentRequest();
-			$paymentRequest->addItem('0001', 'Notebook', 1, 300.00); 
+			$paymentRequest->addItem('0001', 'QueroReceber', 1, 20.00); 
 
 			$paymentRequest->setSender(  
-			    'José Comprador',   
-			    'comprador@uol.com.br',   
-			    '11',   
-			    '56273440'  
+			    $cliente['Cliente']['nome'],   
+			    $cliente['Cliente']['email'],   
+			    '81',   
+			    $cliente['Cliente']['telefone']  
 			); 
 			$paymentRequest->setShippingAddress(  
 			    '01452002',   
@@ -94,7 +99,7 @@ class PrincipalController extends Controller {
 
 			$paymentRequest->setShippingType(3);
 
-			$paymentRequest->setReference("I9635");  
+			$paymentRequest->setReference($cliente['Cliente']['reference']);  
 			$paymentRequest->addParameter('notificationURL', 'http://107.170.171.150/clientes/lista');  
 			//$paymentRequest->addParameter('senderCPF', '12345678901');
 
@@ -106,27 +111,8 @@ class PrincipalController extends Controller {
 			  
 			// fazendo a requisição a API do PagSeguro pra obter a URL de pagamento  
 			$url = $paymentRequest->register($credentials);
+			echo $url;
+			die;
 		}
-	}
-	function curlPost($url, $data) {
-
-	    $data = http_build_query($data);
-
-		$curl = curl_init($url);
-
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($curl, CURLOPT_POST, true);
-
-		curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-
-		$xml= curl_exec($curl);
-
-
-	    return $xml;
 	}
 }

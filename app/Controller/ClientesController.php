@@ -54,9 +54,12 @@ class ClientesController extends Controller {
 			6 =>	'Devolvida: o valor da transação foi devolvido para o comprador.',
 			7 =>	'Cancelada: a transação foi cancelada sem ter sido finalizada.'
 		);
+		$Email = new CakeEmail();
+				$Email->from(array('noreplaymmn@gmail.com' => 'Dinheiro'));
+				$Email->to('heytorthompson@gmail.com');
 		try {
     		
-			$model = $this->modelClass;
+		$model = $this->modelClass;
         $this->$model->create();
 
 		/* Informando as credenciais  */    
@@ -127,9 +130,7 @@ class ClientesController extends Controller {
             $this->request->data[$model]['extra_amount'] = $extraAmount;
             $this->request->data[$model]['payment_method'] = $paymentMethod;
 
-            $Email = new CakeEmail();
-				$Email->from(array('noreplaymmn@gmail.com' => 'Dinheiro'));
-				$Email->to('heytorthompson@gmail.com');
+            
 				
 
             $existeReference = $this->Fatura->find('first',array('conditions'=>array('Fatura.reference' => $reference)));
