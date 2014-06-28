@@ -77,7 +77,7 @@ class PrincipalController extends Controller {
 		if ($cliente) {
 				
 			$paymentRequest = new PagSeguroPaymentRequest();
-			$paymentRequest->addItem('0001', 'QueroReceber', 1, 20.00); 
+			$paymentRequest->addItem('0001', 'QueroReceber', 1, 13.00); 
 
 			$paymentRequest->setSender(  
 			    $cliente['Cliente']['nome'],   
@@ -86,13 +86,13 @@ class PrincipalController extends Controller {
 			    $cliente['Cliente']['telefone']  
 			); 
 			$paymentRequest->setShippingAddress(  
-			    '01452002',   
-			    'Av. Brig. Faria Lima',       
-			    '1384',       
-			    'apto. 114',       
-			    'Jardim Paulistano',      
-			    'São Paulo',      
-			    'SP',     
+			    '50640040',   
+			    'rua antonio valdevino da costa',       
+			    '280',       
+			    'apto. 1401',       
+			    'Cordeiro',      
+			    'Recife',      
+			    'PE',     
 			    'BRA'     
 			);  
 			$paymentRequest->setCurrency("BRL");  
