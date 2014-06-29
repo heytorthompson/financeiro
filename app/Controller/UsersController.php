@@ -16,7 +16,7 @@ class UsersController extends AppController {
  
  
     public function login() {
-         
+         $this->layout = 'login';
         //if already logged-in, redirect
         if($this->Session->check('Auth.User')){
             $this->redirect(array('action' => 'index'));      
@@ -38,6 +38,7 @@ class UsersController extends AppController {
     }
  
     public function index() {
+        $this->layout = 'admin';
         $this->paginate = array(
             'limit' => 6,
             'order' => array('Cliente.reference' => 'desc' )
@@ -45,6 +46,7 @@ class UsersController extends AppController {
 
         $clientes = $this->paginate('Cliente');
         $this->set(compact('clientes'));
+        
     }
  
  
