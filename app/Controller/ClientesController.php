@@ -65,7 +65,8 @@ class ClientesController extends Controller {
 		/* Informando as credenciais  */    
 		$credentials = new PagSeguroAccountCredentials(      
 		    'heytorthompson@gmail.com',       
-		    '27CF0B0980834A99A84FF278034447B8'      
+		    //'27CF0B0980834A99A84FF278034447B8'
+		    'AD8E06E6E65C4D22AD8A22CD073CD04D'      
 		);  
 		  
 		/* Tipo de notificação recebida */  
