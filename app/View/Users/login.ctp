@@ -1,7 +1,7 @@
 <div id="login" class="tab-pane active">
 
 
-<form action="/financeiro/logincms" class="form-signin" id="UserLoginForm" method="post" accept-charset="utf-8">
+<form action="<?php echo BASE; ?>/users/login" class="form-signin" id="UserLoginForm" method="post" accept-charset="utf-8">
 
 <div style="display:none;"><input type="hidden" name="_method" value="POST"/></div>
 
