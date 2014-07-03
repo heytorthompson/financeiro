@@ -22,6 +22,7 @@
 App::uses('Controller', 'Controller');
 App::import('Vendor', 'PagSeguroLibrary/PagSeguroLibrary');
 App::uses('CakeEmail', 'Network/Email');
+App::uses('File', 'Utility');
 
 /**
  * Application Controller
@@ -70,12 +71,14 @@ class ClientesController extends Controller {
 		);  
 		  
 		/* Tipo de notificação recebida */  
-		$type = $_POST['notificationType'];  
+		$type = $this->request->data['notificationType'];  
 		  
 		/* Código da notificação recebida */  
-		$code = $_POST['notificationCode'];  
+		$code = $this->request->data['notificationCode'];  
 		  
-		  
+		$json = 'type = '.$type. ' code - '.$code;
+		$file = new File('webroot/log/log4.txt', true);
+		$file->write($json);
 		/* Verificando tipo de notificação recebida */  
 		if ($type === 'transaction') {  
 		      

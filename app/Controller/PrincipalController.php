@@ -22,6 +22,7 @@
 App::uses('Controller', 'Controller');
 App::import('Vendor', 'PagSeguroLibrary/PagSeguroLibrary');
 App::uses('CakeEmail', 'Network/Email');
+App::uses('File', 'Utility');
 
 /**
  * Application Controller
@@ -37,6 +38,11 @@ class PrincipalController extends Controller {
 	
 	function index(){
 
+	}
+	function criarLog(){
+		$json = '{=="}';
+		$file = new File('webroot/log/log4.txt', true);
+		$file->write($json);
 	}
 
 	function addCliente(){
