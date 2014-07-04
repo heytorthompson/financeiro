@@ -112,7 +112,7 @@ class PrincipalController extends Controller {
 
 			// Informando as credenciais  
 			$credentials = new PagSeguroAccountCredentials(  
-			    'heytorthompson@gmail.com',   
+			    'heytorthompson@gmail.com'   
 			    //'27CF0B0980834A99A84FF278034447B8'
 			  //  '827946C622AA4CDE890E651ACEBF95FB'  
 			);  
