@@ -12,7 +12,7 @@ $PagSeguroConfig = array();
 $PagSeguroConfig['environment'] = "production"; // production, sandbox
 
 $PagSeguroConfig['credentials'] = array();
-$PagSeguroConfig['credentials']['email'] = "your_pagseguro_email";
+$PagSeguroConfig['credentials']['email'] = "heytorthompson@gmail.com";
 $PagSeguroConfig['credentials']['token']['production'] = "827946C622AA4CDE890E651ACEBF95FB";
 $PagSeguroConfig['credentials']['token']['sandbox'] = "your_sandbox_pagseguro_token";
 
