@@ -54,6 +54,15 @@ class PrincipalController extends Controller {
 			$this->request->data[$model]['registro'] = $this->request->data['registro'];
 			$this->request->data[$model]['telefone'] = $this->request->data['telefone'];
 			$this->request->data[$model]['email'] = $this->request->data['email'];
+			$this->request->data[$model]['ddd'] = $this->request->data['ddd'];
+			$this->request->data[$model]['logradouro'] = $this->request->data['logradouro'];
+			$this->request->data[$model]['numero'] = $this->request->data['numero'];
+			$this->request->data[$model]['complemento'] = $this->request->data['complemento'];
+			$this->request->data[$model]['cep'] = $this->request->data['cep'];
+			$this->request->data[$model]['sobrenome'] = $this->request->data['sobrenome'];
+			$this->request->data[$model]['bairro'] = $this->request->data['bairro'];
+			$this->request->data[$model]['cidade'] = $this->request->data['cidade'];
+			$this->request->data[$model]['estado'] = $this->request->data['estado'];
 			$this->request->data[$model]['reference'] = $reference;
 
 			if($this->$model->save($this->request->data)){
@@ -67,9 +76,7 @@ class PrincipalController extends Controller {
 				$html .= "email : ".$this->request->data['email'].'</br>';
 				$html .= "registro : ".$this->request->data['registro'].'</br>';
 				$reposta = $Email->send($html);
-					echo '<pre>';
-				var_dump($reposta);
-				die;
+				$this->set('sucesso', 'cadastrado com sucesso');	
 			}else{
 				die('erro');
 			}
@@ -86,20 +93,20 @@ class PrincipalController extends Controller {
 			$paymentRequest->addItem('0001', 'QueroReceber', 1, 13.00); 
 
 			$paymentRequest->setSender(  
-			    $cliente['Cliente']['nome'],   
+			    $cliente['Cliente']['nome'].' '.$cliente['Cliente']['sobrenome'],   
 			    $cliente['Cliente']['email'],  
 			    //'c51594288315567123751@sandbox.pagseguro.com.br', 
-			    '81',   
+			    $cliente['Cliente']['ddd'],   
 			    $cliente['Cliente']['telefone']  
 			); 
 			$paymentRequest->setShippingAddress(  
-			    '50640040',   
-			    'rua antonio valdevino da costa',       
-			    '280',       
-			    'apto. 1401',       
-			    'Cordeiro',      
-			    'Recife',      
-			    'PE',     
+			    $cliente['Cliente']['cep'],   
+			    $cliente['Cliente']['logradouro'],       
+			    $cliente['Cliente']['numero'],       
+			    $cliente['Cliente']['complemento'],       
+			    $cliente['Cliente']['bairro'],      
+			    $cliente['Cliente']['cidade'],      
+			    $cliente['Cliente']['estado'],     
 			    'BRA'     
 			);  
 			$paymentRequest->setCurrency("BRL");  
@@ -112,9 +119,9 @@ class PrincipalController extends Controller {
 
 			// Informando as credenciais  
 			$credentials = new PagSeguroAccountCredentials(  
-			    'heytorthompson@gmail.com',   
+			    'tiagoelias.adv@live.com',   
 			    //'27CF0B0980834A99A84FF278034447B8'
-			    '827946C622AA4CDE890E651ACEBF95FB'  
+			    '20C346FCDCF44B069A5AF64C31D68A6D'  
 			);  
 			  
 			// fazendo a requisição a API do PagSeguro pra obter a URL de pagamento  

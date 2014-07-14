@@ -3,7 +3,7 @@
 
 <!-- Form Name -->
 <legend>Dados para contato</legend>
-
+<div class="alert alert-success" role="alert"><b>Sucesso</b> Cadastro realizado com sucesso, entraremos em contato para maiores informações !</div>
 <!-- Text input-->
 <div class="form-group">
   <label class="control-label col-lg-2" for="nome">Nome*</label>
