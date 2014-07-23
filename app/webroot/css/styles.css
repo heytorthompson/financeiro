@@ -100,7 +100,10 @@ body {
   letter-spacing: -1px;
 }
 
-
+.carousel-caption p,.carousel-caption h1 {color:#666!important; text-shadow:none!important;}
+.carousel-caption p {
+font-size: 14px!important;
+line-height: 16px!important;}
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */

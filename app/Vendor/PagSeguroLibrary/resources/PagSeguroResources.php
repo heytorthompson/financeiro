@@ -1,4 +1,5 @@
 <?php
+
 // Static URLs
 $PagSeguroResources['staticUrl'] = array();
 $PagSeguroResources['staticUrl']['production'] = "https://stc.pagseguro.uol.com.br";

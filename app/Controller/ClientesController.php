@@ -76,9 +76,9 @@ class ClientesController extends Controller {
 		/* Código da notificação recebida */  
 		$code = $this->request->data['notificationCode'];  
 		  
-		$json = 'type = '.$type. ' code - '.$code;
-		$file = new File('webroot/log/ArquivoLog.txt', true);
-		$file->write($json);
+		// $json = 'type = '.$type. ' code - '.$code;
+		// $file = new File('webroot/log/ArquivoLog.txt', true);
+		// $file->write($json);
 		/* Verificando tipo de notificação recebida */  
 		if ($type === 'transaction') {  
 		      

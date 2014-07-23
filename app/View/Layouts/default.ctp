@@ -21,12 +21,17 @@
 <div id="myCarousel" class="carousel slide">
   
   <div class="carousel-inner">
-    <div class="item active">
-    <img src="http://lorempixel.com/1500/600/abstract/2" class="img-responsive">
+
+   <div class="item active">
+    <?php echo $this->Html->image('banner.jpg', array('alt' => 'CakePHP'))?>
       <div class="container">
         <div class="carousel-caption">
-          <h1>Changes to the Grid</h1>
-          <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+          <h1>Thiago Elias</h1>
+          <p>Fundado em fevereiro de 2011, o escritório Tiago Elias - Advogados é fruto da união de profissionais altamente competentes, criativos e dinâmicos que se dedicam, com responsabilidade e disciplina, na prestação de serviços jurídicos da mais alta qualidade e com notórios padrões éticos. </p>
+<p>Nossos advogados  trabalham especialmente na assessoria jurídica de Empresas de Vendas Diretas de Produtos e/ou serviços; Empresas de Marketing Digital e nas demais Empresas que remuneram no sistema de multinível.</p>
+<p>Além disso, vivemos em um momento em que o Poder Judiciário, em diversas ações judiciais promovidas pelo Ministério Público, bloqueou a movimentação financeira de diversas Empresas do Ramo, e por consequência, diversas pessoas tiveram seus investimentos bloqueados. </p>
+
+<p>Para maiores informações preencha seus dados abaixo:   </p>  
           
         </div>
       </div>
