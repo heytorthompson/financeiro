@@ -6,6 +6,7 @@
 		<title>3 Carousel Layout (BS 3)</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<?php 
 		echo $this->Html->css('bootstrap.min.css');
 		echo $this->Html->css('styles.css');
@@ -18,28 +19,25 @@
 	<body>
 <!-- Carousel
 ================================================== -->
-<div id="myCarousel" class="carousel slide">
-  
-  <div class="carousel-inner">
+<header id="myCarousel">
+  <div class="center">
+	    <?php echo $this->Html->image('banner.png', array('alt' => 'CakePHP'))?>
+	          <h1>Thiago Elias</h1>
+	          <div>
+		          <p>Fundado em fevereiro de 2011, o escritório Tiago Elias - Advogados é fruto da união de profissionais altamente competentes, criativos e dinâmicos que se dedicam, com responsabilidade e disciplina, na prestação de serviços jurídicos da mais alta qualidade e com notórios padrões éticos. </p>
+		<p>Nossos advogados  trabalham especialmente na assessoria jurídica de Empresas de Vendas Diretas de Produtos e/ou serviços; Empresas de Marketing Digital e nas demais Empresas que remuneram no sistema de multinível.</p>
+		<p>Além disso, vivemos em um momento em que o Poder Judiciário, em diversas ações judiciais promovidas pelo Ministério Público, bloqueou a movimentação financeira de diversas Empresas do Ramo, e por consequência, diversas pessoas tiveram seus investimentos bloqueados. </p>
 
-   <div class="item active">
-    <?php echo $this->Html->image('banner.jpg', array('alt' => 'CakePHP'))?>
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Thiago Elias</h1>
-          <p>Fundado em fevereiro de 2011, o escritório Tiago Elias - Advogados é fruto da união de profissionais altamente competentes, criativos e dinâmicos que se dedicam, com responsabilidade e disciplina, na prestação de serviços jurídicos da mais alta qualidade e com notórios padrões éticos. </p>
-<p>Nossos advogados  trabalham especialmente na assessoria jurídica de Empresas de Vendas Diretas de Produtos e/ou serviços; Empresas de Marketing Digital e nas demais Empresas que remuneram no sistema de multinível.</p>
-<p>Além disso, vivemos em um momento em que o Poder Judiciário, em diversas ações judiciais promovidas pelo Ministério Público, bloqueou a movimentação financeira de diversas Empresas do Ramo, e por consequência, diversas pessoas tiveram seus investimentos bloqueados. </p>
-
-<p>Para maiores informações preencha seus dados abaixo:   </p>  
-          
-        </div>
-      </div>
-    </div>
-  
+		<p>Para maiores informações preencha seus dados abaixo:   </p>  
+	          	
+	          </div>
+	          
+  	
   </div>
+
   
-</div>
+  
+</header>
 <!-- /.carousel -->
 
 

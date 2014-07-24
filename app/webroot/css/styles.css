@@ -3,6 +3,7 @@
 body {
   padding-bottom: 40px;
   color: #5a5a5a;
+  overflow: hidden;
 }
 
 
@@ -19,6 +20,34 @@ body {
   z-index: 10;
 }
 
+#myCarousel,.marketing {
+height: 100%;
+position: absolute;
+width: 100%;left: 0;}
+
+#myCarousel { overflow-y:auto; top: 0; background: url(../img/hero-bg.jpg) center; background-size: 168%; background-attachment: fixed;}
+.center {max-width: 1200px; margin: 0 auto; position: relative;padding-top: 1px;}
+#myCarousel img {margin-top: 30px;float: left;}
+#myCarousel h1 {
+left: 330px;font-size: 99px;color: #fff;position: absolute;top: 24px;}
+#myCarousel h1 {text-shadow: -1px -1px 0 #BEBEBE;}
+#myCarousel p {}
+#myCarousel h1, #myCarousel p { 
+color: #08365A;
+}
+
+#myCarousel p {
+font-size: 22px;
+left: 233px;
+text-align: center;
+line-height: 32px;
+width: 90%;
+margin: 10px auto 0;}
+.marketing {top:100%;}
+
+#myCarousel p:first-child {
+margin-top: 200px;
+}
 
 
 /* CUSTOMIZE THE CAROUSEL
