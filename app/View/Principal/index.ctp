@@ -1,3 +1,4 @@
+
 <form class="form-horizontal" method="post" action="<?php echo BASE?>/Principal/addCliente" >
 <fieldset>
 
@@ -82,7 +83,7 @@
 <div class="form-group">
   <label class="control-label" for="singlebutton"></label>
   <div class="controls">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Enviar</button>
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Enviar</button>
   </div>
 </div>
 
