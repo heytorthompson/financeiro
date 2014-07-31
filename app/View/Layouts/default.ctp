@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>3 Carousel Layout (BS 3)</title>
+		<title>Tiago Elias</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
